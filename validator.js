@@ -53,15 +53,17 @@ function Validator(options) {
             })
 
             if(isFormValid) {
+                // Truong hop submit voi Javascript
                 if(typeof options.onSubmit === 'function') {
                     var enableInputs = formElement.querySelectorAll('[name]:not([disabled])')
                     var formValues = Array.from(enableInputs).reduce((values, input) => {
                         return (values[input.name] = input.value) && values;
                     }, {})
-                    console.log(formValues)
-                    options.onSubmit({
-                        name: 'Son Dang'
-                    })
+                    options.onSubmit(formValues)
+                } 
+                // Truong hop submit voi hanh vi mac dinh
+                else {
+                    formElement.submit();
                 }
             }
         }
